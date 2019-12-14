@@ -1,7 +1,7 @@
 import numpy as np
 import cv2, PIL
 from cv2 import aruco
-import urllib
+from urllib import request
 url = input()
 d1 = 353.5533905932738
 d2 = 250
@@ -12,14 +12,14 @@ def posAr(corners,i):
 def url_to_image(url):
     # download the image, convert it to a NumPy array, and then read
     # it into OpenCV format
-    resp = urllib.urlopen(url)
+    resp = request.urlopen(url)
     image = np.asarray(bytearray(resp.read()), dtype="uint8")
     image = cv2.imdecode(image, cv2.IMREAD_COLOR)
  
     # return the image
     return image
     
-#frame = cv2.imread('https://stepik.org/media/attachments/lesson/284187/test_1_1.jpg')
+#frame = cv2.imread('example_2.jpg')
 frame = url_to_image(url)
 fr = frame.copy()
 cvtfr = cv2.inRange(fr,(0,0,150),(255,110,255))
